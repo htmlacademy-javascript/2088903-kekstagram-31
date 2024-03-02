@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Dima Krasnov](https://up.htmlacademy.ru/javascript/31/user/2088903).
-* Наставник: `Неизвестно`.
+* Наставник: [Артём Новоселов](https://htmlacademy.ru/profile/id1195129).
 
 ---
 
