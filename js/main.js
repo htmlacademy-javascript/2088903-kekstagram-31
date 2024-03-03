@@ -1,6 +1,7 @@
 import {createRandomObjects, createObject} from './mock-data';
+import {renderGallery} from './gallery';
 
-// console.log(createRandomObjects(25, createObject));
+const gallery = document.querySelector('.pictures');
+const randomObjects = createRandomObjects(25, createObject);
 
-// Special for ESLint
-createRandomObjects(25, createObject);
+renderGallery(randomObjects, gallery);
