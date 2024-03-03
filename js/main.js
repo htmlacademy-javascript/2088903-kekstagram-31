@@ -10,6 +10,15 @@ const NAMES = [
   'Николай', 'Татьяна', 'Владимир', 'Светлана', 'Андрей'
 ];
 
+const MESSAGES = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+];
+
 const createRandomObjects = (number, cb) => {
   const resultArray = [];
   for (let i = 0; i < number; i++) {
@@ -21,8 +30,8 @@ const createRandomObjects = (number, cb) => {
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${ getRandomInteger(1, 6) }.svg`,
-  message: 'В целом всё неплохо. Но не всё.',
-  name: `${NAMES[getRandomInteger(1, 15)]}`,
+  message: `${MESSAGES[getRandomInteger(0, 5)]}`,
+  name: `${NAMES[getRandomInteger(0, 14)]}`,
 });
 
 const createObject = () => ({
@@ -30,10 +39,10 @@ const createObject = () => ({
   url: `photos/${ generateUrlId() }.jpg`,
   description: 'Описание придумайте самостоятельно',
   likes: generateLikesNumbers(),
-  comments: createRandomObjects(15, createComment)
+  comments: createRandomObjects(getRandomInteger(0, 30), createComment)
 });
 
-// console.log(createRandomObjects(25, createObject));
+console.log(createRandomObjects(25, createObject));
 
 // Special for ESLint
 createRandomObjects(25, createObject);
