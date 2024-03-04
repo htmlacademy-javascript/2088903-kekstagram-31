@@ -5,12 +5,13 @@ const pictureTemplate = document.querySelector('#picture')
 const createCard = (({ url, description, likes, comments }) => {
   const fragment = document.createDocumentFragment();
   const newCard = pictureTemplate.cloneNode(true);
-  newCard.querySelector('.picture__img').src = url;
-  newCard.querySelector('.picture__img').alt = description;
+  const newCardImage = newCard.querySelector('.picture__img');
+  newCardImage.src = url;
+  newCardImage.alt = description;
   newCard.querySelector('.picture__likes').textContent = likes;
   newCard.querySelector('.picture__comments').textContent = comments.length;
   fragment.append(newCard);
-  return fragment.querySelector('.picture');
+  return fragment;
 });
 
 const renderGallery = (data, container) => {
