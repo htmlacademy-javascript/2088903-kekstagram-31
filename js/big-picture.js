@@ -4,39 +4,32 @@ const galleryContainer = document.querySelector('.pictures');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeButton = bigPictureContainer.querySelector('.big-picture__cancel');
 
+const openPictureModal = (evt, cb) => {
+  bigPictureContainer.classList.remove('hidden');
+  if (evt.target.closest('.picture')) {
+    // getPictureData();
+  }
+
+  document.addEventListener('keydown', cb);
+};
+
+const closePictureModal = (cb) => {
+  bigPictureContainer.classList.add('hidden');
+  // clearBigPicture();
+
+  document.removeEventListener('keydown', cb);
+};
 
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closePictureModal();
+    closePictureModal(onDocumentKeydown);
   }
 };
 
-function openPictureModal (evt) {
-  bigPictureContainer.classList.remove('hidden');
-  // renderBigPicture();
-  if (evt.target.closest('.picture')) {
-    // getPictureData();
-    console.log('click');
-  }
+const openModalHandler = (evt) => openPictureModal(evt, onDocumentKeydown);
 
-  document.addEventListener('keydown', onDocumentKeydown);
-}
+const closeModalHandler = () => closePictureModal(onDocumentKeydown);
 
-function closePictureModal () {
-  bigPictureContainer.classList.add('hidden');
-  // clearBigPicture();
-
-  document.removeEventListener('keydown', onDocumentKeydown);
-}
-
-galleryContainer.addEventListener('click', (evt) => {
-  openPictureModal(evt);
-});
-
-closeButton.addEventListener('click', () => {
-  closePictureModal();
-});
-
-
-
+galleryContainer.addEventListener('click', openModalHandler);
+closeButton.addEventListener('click', closeModalHandler);
