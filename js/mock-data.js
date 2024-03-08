@@ -1,5 +1,6 @@
 import {createRandomIdFromRangeGenerator, getRandomInteger} from './utils.js';
 
+
 const generateId = createRandomIdFromRangeGenerator(1, 25);
 const generateUrlId = createRandomIdFromRangeGenerator(1, 25);
 const generateLikesNumbers = createRandomIdFromRangeGenerator(15, 200);
