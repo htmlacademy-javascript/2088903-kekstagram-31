@@ -1,27 +1,34 @@
 import {getObjectById, isEscapeKey} from './utils.js';
+import {clearBigPicture, getMoreComments} from './big-picture';
 
+const bodyField = document.querySelector('body');
 const galleryContainer = document.querySelector('.pictures');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeButton = bigPictureContainer.querySelector('.big-picture__cancel');
-const bodyField = document.querySelector('body');
+const loadMoreButton = bigPictureContainer.querySelector('.comments-loader');
+
+// const commentsContainer = bigPictureContainer.querySelector('.social__comments');
+//
+// const COUNT_STEP = 5;
 
 const setModalHandlers = (onSelect, data) => {
   const openPictureModal = (evt, cb) => {
     bigPictureContainer.classList.remove('hidden');
     bodyField.classList.add('modal-open');
     const selectedPicture = evt.target.closest('.picture');
-    onSelect(getObjectById(data, selectedPicture.dataset.id));
+    const selectedData = getObjectById(data, selectedPicture.dataset.id);
+    onSelect(selectedData);
     document.addEventListener('keydown', cb);
-    // temporarily hidden, functionality will be added later
-    bigPictureContainer.querySelector('.social__comment-count').classList.add('hidden');
-    bigPictureContainer.querySelector('.comments-loader').classList.add('hidden');
+    loadMoreButton.addEventListener('click', () => getMoreComments(selectedData));
   };
 
   const closePictureModal = (cb) => {
     bigPictureContainer.classList.add('hidden');
-    // clearBigPicture();
+    bodyField.classList.remove('modal-open');
+    clearBigPicture();
 
     document.removeEventListener('keydown', cb);
+    loadMoreButton.removeEventListener('click', getMoreComments);
   };
 
   const onDocumentKeydown = (evt) => {
@@ -37,6 +44,7 @@ const setModalHandlers = (onSelect, data) => {
 
   galleryContainer.addEventListener('click', openModalHandler);
   closeButton.addEventListener('click', closeModalHandler);
+
 };
 
 export {setModalHandlers};
