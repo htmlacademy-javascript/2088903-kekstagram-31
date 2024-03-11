@@ -1,15 +1,12 @@
 import {getObjectById, isEscapeKey} from './utils.js';
-import {clearBigPicture, getMoreComments} from './big-picture';
+import {clearBigPicture} from './big-picture.js';
+import {getMoreComments} from './comments.js';
 
 const bodyField = document.querySelector('body');
 const galleryContainer = document.querySelector('.pictures');
 const bigPictureContainer = document.querySelector('.big-picture');
 const closeButton = bigPictureContainer.querySelector('.big-picture__cancel');
 const loadMoreButton = bigPictureContainer.querySelector('.comments-loader');
-
-// const commentsContainer = bigPictureContainer.querySelector('.social__comments');
-//
-// const COUNT_STEP = 5;
 
 const setModalHandlers = (onSelect, data) => {
   const openPictureModal = (evt, cb) => {
