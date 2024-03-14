@@ -1,4 +1,4 @@
-import {getObjectById, isEscapeKey} from './utils.js';
+import {getObjectById, isEscapeKey} from './utils/dom.js';
 import {clearBigPicture} from './big-picture.js';
 import {getMoreComments} from './comments.js';
 
