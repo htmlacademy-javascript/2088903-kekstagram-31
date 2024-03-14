@@ -1,4 +1,4 @@
-import {findTemplate, renderItems} from './utils/dom.js';
+import {findTemplate, renderItems} from './utils/common.js';
 
 const thumbnailTemplate = findTemplate('picture');
 const thumbnailsContainer = document.querySelector('.pictures');
