@@ -1,0 +1,5 @@
+const COUNT_STEP = 5;
+
+const MAX_HASHTAGS_NUMBER = 5;
+
+export { COUNT_STEP, MAX_HASHTAGS_NUMBER };
