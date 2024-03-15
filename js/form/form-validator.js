@@ -1,5 +1,5 @@
 import {isHashtagsValid} from './hashtags-validation.js';
-import {getArray, isItemsUnique} from '../utils/common.js';
+import {getArray, isEscapeKey, isItemsUnique} from '../utils/common.js';
 import {MAX_HASHTAGS_NUMBER} from '../const.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -32,8 +32,21 @@ pristine.addValidator(hashtagsText, validateText, 'Введён невалидн
 const validateComment = (value) => value.length <= 140;
 pristine.addValidator(commentText, validateComment, 'Не более 140 символов');
 
-const onHashtagsChange = () => setInputValidator(hashtagsText);
-const onCommentChange = () => setInputValidator(commentText);
+const onHashtagsChange = (evt) => {
+  setInputValidator(hashtagsText);
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
+};
+const onCommentChange = (evt) => {
+  setInputValidator(commentText);
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
+};
+
+hashtagsText.addEventListener('keydown', onHashtagsChange);
+commentText.addEventListener('keydown', onCommentChange);
 
 hashtagsText.addEventListener('change', onHashtagsChange);
 commentText.addEventListener('change', onCommentChange);
