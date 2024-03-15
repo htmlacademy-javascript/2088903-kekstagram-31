@@ -1,5 +1,6 @@
 import {isEscapeKey} from '../utils/common.js';
 import {resetForm} from './form-render.js';
+import {resetScale} from './scale.js';
 
 const body = document.body;
 const form = document.querySelector('.img-upload__form');
@@ -19,6 +20,7 @@ const closeFormModal = (cb) => {
   body.classList.remove('modal-open');
   uploadInput.value = null;
   resetForm();
+  resetScale();
 
   document.removeEventListener('keydown', cb);
 };
