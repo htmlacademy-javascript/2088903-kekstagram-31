@@ -22,4 +22,8 @@ const renderItems = (items, createItem, container) => {
   container.append(fragment);
 };
 
-export { isEscapeKey, getObjectById, findTemplate, renderItems };
+const isItemsUnique = (array) => new Set(array).size === array.length;
+
+const getArray = (string) => string.toLowerCase().split(' ');
+
+export { isEscapeKey, getObjectById, findTemplate, renderItems, isItemsUnique, getArray };
