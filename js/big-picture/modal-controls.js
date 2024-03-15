@@ -1,34 +1,30 @@
-import {getObjectById, isEscapeKey} from './utils/common.js';
+import {getObjectById, isEscapeKey} from '../utils/common.js';
 import {clearBigPicture} from './big-picture.js';
-import {getMoreComments} from './comments.js';
 
 const bodyField = document.querySelector('body');
 const galleryContainer = document.querySelector('.pictures');
-const bigPictureContainer = document.querySelector('.big-picture');
-const closeButton = bigPictureContainer.querySelector('.big-picture__cancel');
-const loadMoreButton = bigPictureContainer.querySelector('.comments-loader');
+const bigPicture = document.querySelector('.big-picture');
+const closeButton = bigPicture.querySelector('.big-picture__cancel');
 
 const setModalHandlers = (onSelect, data) => {
 
   const openPictureModal = (evt, cb) => {
     const selectedPicture = evt.target.closest('.picture');
     if (selectedPicture) {
-      bigPictureContainer.classList.remove('hidden');
+      bigPicture.classList.remove('hidden');
       bodyField.classList.add('modal-open');
       const selectedData = getObjectById(data, selectedPicture.dataset.id);
       onSelect(selectedData);
       document.addEventListener('keydown', cb);
-      loadMoreButton.addEventListener('click', () => getMoreComments(selectedData));
     }
   };
 
   const closePictureModal = (cb) => {
-    bigPictureContainer.classList.add('hidden');
+    bigPicture.classList.add('hidden');
     bodyField.classList.remove('modal-open');
     clearBigPicture();
 
     document.removeEventListener('keydown', cb);
-    loadMoreButton.removeEventListener('click', getMoreComments);
   };
 
   const onDocumentKeydown = (evt) => {
