@@ -4,6 +4,7 @@ import {setModalHandlers} from './big-picture/modal-controls.js';
 import {renderBigPicture} from './big-picture/big-picture.js';
 import {validateForm} from './form/form-validator.js';
 import './form/form-controls.js';
+import './form/effect.js';
 
 const randomObjects = createRandomObjects(25, createObject);
 
