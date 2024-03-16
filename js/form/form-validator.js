@@ -9,25 +9,22 @@ const commentText = form.querySelector('.text__description');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field-wrapper--error',
-  successClass: 'img-upload__field-wrapper--valid',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error'
-}, false);
+  errorTextClass: 'img-upload__field-wrapper--error'
+});
 
 const setInputValidator = (element) => {
   pristine.validate(element);
 };
 
-const validateUnique = (value) => isItemsUnique(getArray(value));
-pristine.addValidator(hashtagsText, validateUnique, 'Хэштеги повторяются');
-
-const validateLength = (value) => getArray(value).length <= MAX_HASHTAGS_NUMBER;
-pristine.addValidator(hashtagsText, validateLength, 'Превышено количество хэштегов');
-
 const validateText = (value) => isHashtagsValid(getArray(value));
 pristine.addValidator(hashtagsText, validateText, 'Введён невалидный хэштег');
+
+const validateUnique = (value) => isItemsUnique(getArray(value.toLowerCase()).filter((word) => word[0] === '#'));
+pristine.addValidator(hashtagsText, validateUnique, 'Хэштеги повторяются');
+
+const validateLength = (value) => getArray(value).filter((word) => word[0] === '#').length <= MAX_HASHTAGS_NUMBER;
+pristine.addValidator(hashtagsText, validateLength, 'Превышено количество хэштегов');
 
 const validateComment = (value) => value.length <= 140;
 pristine.addValidator(commentText, validateComment, 'Не более 140 символов');
