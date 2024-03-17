@@ -6,11 +6,14 @@ import {getData} from './api.js';
 import {showErrorMessage, showGetDataErrorMessage, showSuccessMessage} from './message.js';
 import './form/form-controls.js';
 import './form/effect.js';
+import { enableFilters, setFilterOnClick} from './filter.js';
 
 getData()
   .then((data) => {
+    enableFilters(data);
     renderThumbnails(data);
     setModalHandlers(renderBigPicture, data);
+    setFilterOnClick(renderThumbnails);
   })
   .catch(showGetDataErrorMessage);
 

@@ -16,6 +16,9 @@ const createThumbnail = (({ id, url, description, likes, comments }) => {
   return thumbnail;
 });
 
-const renderThumbnails = (photos) => renderItems(photos, createThumbnail,thumbnailsContainer);
+const renderThumbnails = (photos) => {
+  thumbnailsContainer.querySelectorAll('.picture').forEach((element) => element.remove());
+  renderItems(photos, createThumbnail,thumbnailsContainer);
+};
 
 export { renderThumbnails };
