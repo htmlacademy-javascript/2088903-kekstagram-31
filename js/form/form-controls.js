@@ -9,14 +9,14 @@ const uploadInput = form.querySelector('.img-upload__input');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 
-const showFormModal = (evt, cb) => {
+const showFormModal = () => {
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  document.addEventListener('keydown', cb);
+  document.addEventListener('keydown', onEscKeydown);
 };
 
-const closeFormModal = (cb) => {
+const closeFormModal = () => {
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadInput.value = null;
@@ -24,19 +24,21 @@ const closeFormModal = (cb) => {
   resetScale();
   resetEffects();
 
-  document.removeEventListener('keydown', cb);
+  document.removeEventListener('keydown', onEscKeydown);
 };
 
-const onEscKeydown = (evt) => {
+function onEscKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeFormModal(onEscKeydown);
   }
-};
+}
 
-const showModalHandler = (evt) => showFormModal(evt, onEscKeydown);
+const onUpload = () => showFormModal();
 
-const closeModalHandler = () => closeFormModal(onEscKeydown);
+const onCloseClick = () => closeFormModal();
 
-uploadInput.addEventListener('change', showModalHandler);
-closeButton.addEventListener('click', closeModalHandler);
+uploadInput.addEventListener('change', onUpload);
+closeButton.addEventListener('click', onCloseClick);
+
+export { closeFormModal };
