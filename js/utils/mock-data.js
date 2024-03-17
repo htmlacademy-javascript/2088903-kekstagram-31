@@ -1,4 +1,4 @@
-import {createRandomIdFromRangeGenerator, getRandomInteger} from './utils/random.js';
+import {createRandomIdFromRangeGenerator, getRandomInteger} from './random.js';
 
 
 const generateId = createRandomIdFromRangeGenerator(1, 25);

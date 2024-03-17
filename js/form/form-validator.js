@@ -1,6 +1,7 @@
 import {isHashtagsValid} from './hashtags-validation.js';
 import {getArray, isEscapeKey, isItemsUnique} from '../utils/common.js';
 import {MAX_HASHTAGS_NUMBER} from '../const.js';
+import {sendData} from '../api.js';
 
 const form = document.querySelector('.img-upload__form');
 const formSubmitButton = document.querySelector('.img-upload__submit');
@@ -61,7 +62,7 @@ const resetForm = () => {
   pristine.reset();
 };
 
-const validateForm = () => {
+const validateForm = (onSuccess, onError) => {
 
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -70,8 +71,13 @@ const validateForm = () => {
 
     if (isValid) {
       blockSubmitButton();
-      resetForm();
-      unblockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(() => {
+          onSuccess();
+          resetForm();
+        })
+        .catch(onError)
+        .finally(unblockSubmitButton);
     }
   });
 };
