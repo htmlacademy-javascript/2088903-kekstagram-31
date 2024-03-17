@@ -4,7 +4,7 @@ const MAX_HASHTAGS_NUMBER = 5;
 
 const EFFECTS = [
   {
-    name: 'original',
+    name: 'none',
     min: 0,
     max: 100,
     step: 1,
