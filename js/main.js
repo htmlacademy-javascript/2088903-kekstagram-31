@@ -1,10 +1,15 @@
-import {createRandomObjects, createObject} from './mock-data.js';
-import {renderGallery} from './gallery.js';
-import {setModalHandlers} from './modal-controls.js';
-import {renderBigPicture} from './big-picture';
+import {renderThumbnails} from './thumbnails.js';
+import {setModalHandlers} from './big-picture/modal-controls.js';
+import {renderBigPicture} from './big-picture/big-picture.js';
+import {getData} from './api.js';
+import {showGetDataErrorMessage} from './message.js';
+import { enableFilters, setFilterOnClick} from './filter.js';
 
-const gallery = document.querySelector('.pictures');
-const randomObjects = createRandomObjects(25, createObject);
-
-renderGallery(randomObjects, gallery);
-setModalHandlers(renderBigPicture, randomObjects);
+getData()
+  .then((data) => {
+    enableFilters(data);
+    renderThumbnails(data);
+    setModalHandlers(renderBigPicture, data);
+    setFilterOnClick(renderThumbnails);
+  })
+  .catch(showGetDataErrorMessage);

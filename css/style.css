@@ -711,12 +711,13 @@ main {
 }
 
 .img-upload__field-wrapper--error {
-  background-color: #fd4d4b;
+  position: relative;
+  z-index: 10000;
+  width: 450px;
+  margin: -20px auto 0;
   color:#ffffff;
   font-size: 12px;
-  margin-top: -20px;
-  z-index: 10000;
-  position: relative;
+  background-color: #fd4d4b;
 }
 
 
