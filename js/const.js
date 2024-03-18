@@ -82,6 +82,8 @@ const Filter = {
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+const TIME_TO_CLOSING = 5000;
+
 export {
   COMMENTS_COUNT_STEP,
   MAX_HASHTAGS_NUMBER,
@@ -94,5 +96,6 @@ export {
   ErrorText,
   RANDOM_PICTURES_COUNT,
   Filter,
-  FILE_TYPES
+  FILE_TYPES,
+  TIME_TO_CLOSING
 };

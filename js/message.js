@@ -1,5 +1,6 @@
 import {findTemplate, isEscapeKey} from './utils/common.js';
 import {closeFormModal} from './form/form-controls.js';
+import {TIME_TO_CLOSING} from './const.js';
 
 const body = document.querySelector('body');
 const dataErrorMessage = findTemplate('data-error');
@@ -13,7 +14,7 @@ const isClickOnButton = (evt) => evt.target.closest('.success__button') || evt.t
 const showGetDataErrorMessage = () => {
   body.append(dataErrorMessage);
 
-  setTimeout(() => dataErrorMessage.remove(), 5000);
+  setTimeout(() => dataErrorMessage.remove(), TIME_TO_CLOSING);
 };
 
 const showSuccessMessage = () => {

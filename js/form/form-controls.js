@@ -3,6 +3,8 @@ import {renderUploadedImage, resetForm} from './form-render.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
 import {FILE_TYPES} from '../const.js';
+import {validateForm} from './form-validator.js';
+import {showErrorMessage, showSuccessMessage} from '../message.js';
 
 const body = document.querySelector('body');
 const form = body.querySelector('.img-upload__form');
@@ -10,10 +12,13 @@ const uploadInput = form.querySelector('.img-upload__input');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
 
+let onSubmitLink;
+
 const showFormModal = () => {
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
 
+  onSubmitLink = validateForm(showSuccessMessage, showErrorMessage);
   document.addEventListener('keydown', onEscKeydown);
 };
 
@@ -25,6 +30,7 @@ const closeFormModal = () => {
   resetScale();
   resetEffects();
 
+  form.removeEventListener('submit', onSubmitLink);
   document.removeEventListener('keydown', onEscKeydown);
 };
 

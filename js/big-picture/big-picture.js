@@ -5,7 +5,6 @@ const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
 const imageDescription = bigPicture.querySelector('.social__caption');
 
-
 const renderBigPicture = ({url, likes, comments, description}) => {
   bigPictureImg.src = url;
   likesCount.textContent = likes;

@@ -1,4 +1,4 @@
-import {getArray, isEscapeKey, isItemsUnique} from '../utils/common.js';
+import {cancelOnEscapeKey, getArray, isItemsUnique} from '../utils/common.js';
 import {HASHTAG_REGEXP, MAX_HASHTAGS_NUMBER} from '../const.js';
 import {sendData} from '../api.js';
 
@@ -20,7 +20,6 @@ const setInputValidator = (element) => {
 const validateText = (value) => getArray(value).every((item) => HASHTAG_REGEXP.test(item) || item === '');
 pristine.addValidator(hashtagsText, validateText, 'Введён невалидный хэштег');
 
-
 const validateUnique = (value) => isItemsUnique(getArray(value.toLowerCase()).filter((word) => word[0] === '#'));
 pristine.addValidator(hashtagsText, validateUnique, 'Хэштеги повторяются');
 
@@ -32,15 +31,11 @@ pristine.addValidator(commentText, validateComment, 'Не более 140 сим�
 
 const onHashtagsChange = (evt) => {
   setInputValidator(hashtagsText);
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
+  cancelOnEscapeKey(evt);
 };
 const onCommentChange = (evt) => {
   setInputValidator(commentText);
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
+  cancelOnEscapeKey(evt);
 };
 
 hashtagsText.addEventListener('keydown', onHashtagsChange);
@@ -63,8 +58,7 @@ const resetForm = () => {
 };
 
 const validateForm = (onSuccess, onError) => {
-
-  form.addEventListener('submit', (evt) => {
+  const onSubmit = (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
@@ -79,7 +73,9 @@ const validateForm = (onSuccess, onError) => {
         .catch(onError)
         .finally(unblockSubmitButton);
     }
-  });
+  };
+  form.addEventListener('submit', onSubmit);
+  return onSubmit;
 };
 
 export { validateForm, resetForm };

@@ -1,17 +1,15 @@
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+const cancelOnEscapeKey = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.stopPropagation();
+  }
+};
+
 const getObjectById = (data, id) => data.find((item) => item.id === Number(id));
 
 const findTemplate = (id) => {
   const template = document.getElementById(id);
-
-  if(!template) {
-    throw new Error(`Template not found: ${id}`);
-  }
-
-  if(!(template instanceof HTMLTemplateElement)) {
-    throw new Error(`Element is not a template: ${id}`);
-  }
 
   return template.content.firstElementChild;
 };
@@ -26,4 +24,4 @@ const isItemsUnique = (array) => new Set(array).size === array.length;
 
 const getArray = (string) => string.trim().split(' ');
 
-export { isEscapeKey, getObjectById, findTemplate, renderItems, isItemsUnique, getArray };
+export { isEscapeKey, getObjectById, findTemplate, renderItems, isItemsUnique, getArray, cancelOnEscapeKey };
