@@ -10,8 +10,6 @@ function debounce (callback, timeoutDelay = 500) {
     // Перед каждым новым вызовом удаляем предыдущий таймаут,
     // чтобы они не накапливались
     clearTimeout(timeoutId);
-
-    // Затем устанавливаем новый таймаут с вызовом колбэка на ту же задержку
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 }
