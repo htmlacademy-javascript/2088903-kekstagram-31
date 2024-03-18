@@ -1,6 +1,5 @@
-import {isHashtagsValid} from './hashtags-validation.js';
 import {getArray, isEscapeKey, isItemsUnique} from '../utils/common.js';
-import {MAX_HASHTAGS_NUMBER} from '../const.js';
+import {HASHTAG_REGEXP, MAX_HASHTAGS_NUMBER} from '../const.js';
 import {sendData} from '../api.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -18,8 +17,9 @@ const setInputValidator = (element) => {
   pristine.validate(element);
 };
 
-const validateText = (value) => isHashtagsValid(getArray(value));
+const validateText = (value) => getArray(value).every((item) => HASHTAG_REGEXP.test(item) || item === '');
 pristine.addValidator(hashtagsText, validateText, 'Введён невалидный хэштег');
+
 
 const validateUnique = (value) => isItemsUnique(getArray(value.toLowerCase()).filter((word) => word[0] === '#'));
 pristine.addValidator(hashtagsText, validateUnique, 'Хэштеги повторяются');

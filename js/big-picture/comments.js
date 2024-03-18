@@ -1,4 +1,4 @@
-import {COUNT_STEP} from '../const.js';
+import {COMMENTS_COUNT_STEP} from '../const.js';
 import {findTemplate} from '../utils/common.js';
 
 const commentTemplate = findTemplate('social-comment');
@@ -26,7 +26,7 @@ const createComment = (commentData) => {
 
 const renderNextComments = () => {
   const commentsFragment = document.createDocumentFragment();
-  const renderedComments = comments.slice(currentCount, currentCount + COUNT_STEP);
+  const renderedComments = comments.slice(currentCount, currentCount + COMMENTS_COUNT_STEP);
   const renderedTotal = renderedComments.length + currentCount;
 
   renderedComments.forEach((item) => {
@@ -40,7 +40,7 @@ const renderNextComments = () => {
   if (renderedTotal >= comments.length) {
     loadMoreButton.classList.add('hidden');
   }
-  currentCount += COUNT_STEP;
+  currentCount += COMMENTS_COUNT_STEP;
 };
 
 const clearComments = () => {
@@ -59,4 +59,4 @@ const renderComments = (commentsArray) => {
   loadMoreButton.addEventListener('click', renderNextComments);
 };
 
-export {renderComments, clearComments};
+export { renderComments, clearComments };

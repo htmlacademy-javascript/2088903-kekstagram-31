@@ -1,10 +1,5 @@
-const RANDOM_PICTURES_COUNT = 10;
-
-const Filter = {
-  DEFAULT: 'filter-default',
-  RANDOM: 'filter-random',
-  DISCUSSED: 'filter-discussed',
-};
+import {Filter, RANDOM_PICTURES_COUNT} from './const.js';
+import {debounce} from './utils/debounce.js';
 
 let currentFilter = '';
 let thumbnails = [];
@@ -29,6 +24,8 @@ const filterThumbnails = () => {
 };
 
 const setFilterOnClick = (cb) => {
+  const debouncedCallback = debounce(cb);
+
   filters.addEventListener('click', (evt) => {
     const activeButton = filters.querySelector('.img-filters__button--active');
     const clickedButton = evt.target.closest('.img-filters__button');
@@ -37,7 +34,7 @@ const setFilterOnClick = (cb) => {
       activeButton.classList.remove('img-filters__button--active');
       clickedButton.classList.add('img-filters__button--active');
       currentFilter = clickedButton.id;
-      (cb(filterThumbnails()));
+      debouncedCallback(filterThumbnails());
     }
   });
 };

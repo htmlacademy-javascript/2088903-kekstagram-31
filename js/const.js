@@ -1,4 +1,4 @@
-const COUNT_STEP = 5;
+const COMMENTS_COUNT_STEP = 5;
 
 const MAX_HASHTAGS_NUMBER = 5;
 
@@ -53,4 +53,46 @@ const EFFECTS = [
 
 const DEFAULT_EFFECT = EFFECTS[0];
 
-export { COUNT_STEP, MAX_HASHTAGS_NUMBER, EFFECTS, DEFAULT_EFFECT };
+const HASHTAG_REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+
+const Route = {
+  GET_DATA: '/data',
+  SEND_DATA: '/',
+};
+
+const Method = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
+const ErrorText = {
+  GET_DATA: 'Не удалось загрузить данные. Попробуйте обновить страницу',
+  SEND_DATA: 'Не удалось отправить форму. Попробуйте ещё раз',
+};
+
+const RANDOM_PICTURES_COUNT = 10;
+
+const Filter = {
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
+};
+
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+export {
+  COMMENTS_COUNT_STEP,
+  MAX_HASHTAGS_NUMBER,
+  EFFECTS,
+  DEFAULT_EFFECT,
+  HASHTAG_REGEXP,
+  BASE_URL,
+  Route,
+  Method,
+  ErrorText,
+  RANDOM_PICTURES_COUNT,
+  Filter,
+  FILE_TYPES
+};

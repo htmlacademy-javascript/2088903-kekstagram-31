@@ -1,10 +1,11 @@
 import {isEscapeKey} from '../utils/common.js';
-import {resetForm} from './form-render.js';
+import {renderUploadedImage, resetForm} from './form-render.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
+import {FILE_TYPES} from '../const.js';
 
-const body = document.body;
-const form = document.querySelector('.img-upload__form');
+const body = document.querySelector('body');
+const form = body.querySelector('.img-upload__form');
 const uploadInput = form.querySelector('.img-upload__input');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const closeButton = form.querySelector('.img-upload__cancel');
@@ -34,7 +35,14 @@ function onEscKeydown (evt) {
   }
 }
 
-const onUpload = () => showFormModal();
+const onUpload = () => {
+  const file = uploadInput.files[0];
+  const isImage = FILE_TYPES.some((ending) => file.name.toLowerCase().endsWith(ending));
+  if (isImage) {
+    renderUploadedImage(file);
+    showFormModal();
+  }
+};
 
 const onCloseClick = () => closeFormModal();
 
