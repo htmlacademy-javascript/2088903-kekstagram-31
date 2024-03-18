@@ -25,7 +25,7 @@ const showSuccessMessage = () => {
       closeFormModal();
     }
   });
-  successMessage.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', (evt) => {
     onEscKeydown(evt, successMessage);
   });
 };
@@ -37,7 +37,7 @@ const showErrorMessage = () => {
       errorMessage.remove();
     }
   });
-  errorMessage.addEventListener('keydown', (evt) => {
+  document.addEventListener('keydown', (evt) => {
     onEscKeydown(evt, errorMessage);
   });
 };

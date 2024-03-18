@@ -1,9 +1,9 @@
 import {isEscapeKey} from '../utils/common.js';
-import {renderUploadedImage, resetForm} from './form-render.js';
+import {renderUploadedImage} from './form-render.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
 import {FILE_TYPES} from '../const.js';
-import {validateForm} from './form-validator.js';
+import {resetForm, validateForm} from './form-validator.js';
 import {showErrorMessage, showSuccessMessage} from '../message.js';
 
 const body = document.querySelector('body');
