@@ -3,7 +3,7 @@ import {HASHTAG_REGEXP, MAX_HASHTAGS_NUMBER} from '../const.js';
 import {sendData} from '../api.js';
 
 const form = document.querySelector('.img-upload__form');
-const formSubmitButton = document.querySelector('.img-upload__submit');
+const formSubmitButton = form.querySelector('.img-upload__submit');
 const hashtagsText = form.querySelector('.text__hashtags');
 const commentText = form.querySelector('.text__description');
 
@@ -75,7 +75,7 @@ const validateForm = (onSuccess, onError) => {
     }
   };
   form.addEventListener('submit', onSubmit);
-  return onSubmit;
+  return () => form.removeEventListener('submit', onSubmit);
 };
 
 export { validateForm, resetForm };

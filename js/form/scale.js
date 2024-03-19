@@ -1,13 +1,10 @@
+import {DEFAULT_SCALE, MAX_SCALE, MIN_SCALE, SCALE_STEP} from '../const.js';
+
 const scale = document.querySelector('.img-upload__scale');
 const smallerButton = scale.querySelector('.scale__control--smaller');
 const biggerButton = scale.querySelector('.scale__control--bigger');
 const scaleValue = scale.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview > img');
-
-const DEFAULT_SCALE = 100;
-const SCALE_STEP = 25;
-const MIN_SCALE = 25;
-const MAX_SCALE = 100;
 
 const resetScale = () => {
   imagePreview.style.transform = `scale(${DEFAULT_SCALE / MAX_SCALE})`;

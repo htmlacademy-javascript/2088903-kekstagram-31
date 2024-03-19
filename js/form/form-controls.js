@@ -1,9 +1,9 @@
 import {isEscapeKey} from '../utils/common.js';
-import {renderUploadedImage, resetForm} from './form-render.js';
+import {renderUploadedImage} from './form-render.js';
 import {resetScale} from './scale.js';
 import {resetEffects} from './effect.js';
 import {FILE_TYPES} from '../const.js';
-import {validateForm} from './form-validator.js';
+import {resetForm, validateForm} from './form-validator.js';
 import {showErrorMessage, showSuccessMessage} from '../message.js';
 
 const body = document.querySelector('body');
@@ -19,7 +19,7 @@ const showFormModal = () => {
   body.classList.add('modal-open');
 
   onSubmitLink = validateForm(showSuccessMessage, showErrorMessage);
-  document.addEventListener('keydown', onEscKeydown);
+  body.addEventListener('keydown', onEscKeydown);
 };
 
 const closeFormModal = () => {
@@ -31,11 +31,11 @@ const closeFormModal = () => {
   resetEffects();
 
   form.removeEventListener('submit', onSubmitLink);
-  document.removeEventListener('keydown', onEscKeydown);
+  body.removeEventListener('keydown', onEscKeydown);
 };
 
 function onEscKeydown (evt) {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !(document.querySelector('.error'))) {
     evt.preventDefault();
     closeFormModal(onEscKeydown);
   }
