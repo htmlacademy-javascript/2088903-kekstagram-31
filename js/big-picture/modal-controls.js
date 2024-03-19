@@ -1,9 +1,9 @@
 import {getObjectById, isEscapeKey} from '../utils/common.js';
 import {clearBigPicture} from './big-picture.js';
 
-const bodyField = document.querySelector('body');
-const galleryContainer = document.querySelector('.pictures');
-const bigPicture = document.querySelector('.big-picture');
+const body = document.querySelector('body');
+const galleryContainer = body.querySelector('.pictures');
+const bigPicture = body.querySelector('.big-picture');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
 
 const setModalHandlers = (onSelect, data) => {
@@ -12,19 +12,19 @@ const setModalHandlers = (onSelect, data) => {
     const selectedPicture = evt.target.closest('.picture');
     if (selectedPicture) {
       bigPicture.classList.remove('hidden');
-      bodyField.classList.add('modal-open');
+      body.classList.add('modal-open');
       const selectedData = getObjectById(data, selectedPicture.dataset.id);
       onSelect(selectedData);
-      document.addEventListener('keydown', cb);
+      body.addEventListener('keydown', cb);
     }
   };
 
   const closePictureModal = (cb) => {
     bigPicture.classList.add('hidden');
-    bodyField.classList.remove('modal-open');
+    body.classList.remove('modal-open');
     clearBigPicture();
 
-    document.removeEventListener('keydown', cb);
+    body.removeEventListener('keydown', cb);
   };
 
   const onDocumentKeydown = (evt) => {

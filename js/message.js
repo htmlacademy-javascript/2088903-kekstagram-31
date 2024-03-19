@@ -17,41 +17,54 @@ const showGetDataErrorMessage = () => {
   setTimeout(() => dataErrorMessage.remove(), TIME_TO_CLOSING);
 };
 
+const onSuccessMessageEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    closeFormModal();
+    removeSuccessMessage();
+  }
+};
+
+const onErrorMessageEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    evt.stopPropagation();
+    removeErrorMessage();
+  }
+};
+
+const createOnClick = (evt, cb) => {
+  if (!isClickOnMessage(evt) || isClickOnButton(evt)) {
+    cb();
+  }
+};
+
+const onSuccessMessageClick = (evt) => createOnClick(evt, removeSuccessMessage);
+
+const onErrorMessageClick = (evt) => createOnClick(evt, removeErrorMessage);
+
 const showSuccessMessage = () => {
   closeFormModal();
   body.append(successMessage);
-  successMessage.addEventListener('click', (evt) => {
-    if (!isClickOnMessage(evt) || isClickOnButton(evt)) {
-      successMessage.remove();
-    }
-  });
-  body.addEventListener('keydown', (evt) => {
-    onEscKeydown(evt, successMessage);
-  });
+  successMessage.addEventListener('click', onSuccessMessageClick);
+  body.addEventListener('keydown', onSuccessMessageEscKeydown);
 };
 
 const showErrorMessage = () => {
   body.append(errorMessage);
-  errorMessage.addEventListener('click', (evt) => {
-    if (!isClickOnMessage(evt) || isClickOnButton(evt)) {
-      errorMessage.remove();
-    }
-  });
-  body.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      evt.stopPropagation();
-      setTimeout(() => errorMessage.remove(), 0);
-    }
-  });
+  errorMessage.addEventListener('click', onErrorMessageClick);
+  body.addEventListener('keydown', onErrorMessageEscKeydown);
 };
 
-function onEscKeydown (evt, item) {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeFormModal();
-    item.remove();
-  }
+function removeSuccessMessage () {
+  body.querySelector('.success').remove();
+  body.removeEventListener('keydown', onSuccessMessageEscKeydown);
+}
+
+function removeErrorMessage () {
+  setTimeout(() => body.querySelector('.error').remove(), 0);
+  body.removeEventListener('keydown', onErrorMessageEscKeydown);
 }
 
 export { showGetDataErrorMessage, showSuccessMessage, showErrorMessage };

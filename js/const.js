@@ -84,6 +84,11 @@ const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const TIME_TO_CLOSING = 5000;
 
+const DEFAULT_SCALE = 100;
+const SCALE_STEP = 25;
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+
 export {
   COMMENTS_COUNT_STEP,
   MAX_HASHTAGS_NUMBER,
@@ -97,5 +102,9 @@ export {
   RANDOM_PICTURES_COUNT,
   Filter,
   FILE_TYPES,
-  TIME_TO_CLOSING
+  TIME_TO_CLOSING,
+  DEFAULT_SCALE,
+  SCALE_STEP,
+  MIN_SCALE,
+  MAX_SCALE
 };
