@@ -41,7 +41,8 @@ const onSliderUpdate = () => {
     const sliderValue = slider.noUiSlider.get();
     previewImage.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.measure})`;
     previewImage.classList.add(`effects__preview--${chosenEffect.name}`);
-    effectLevel.value = sliderValue;
+    const numberValue = Number(sliderValue);
+    effectLevel.value = Number.isInteger(numberValue) ? numberValue.toFixed() : numberValue.toFixed(1);
   }
 };
 

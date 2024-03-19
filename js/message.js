@@ -18,14 +18,14 @@ const showGetDataErrorMessage = () => {
 };
 
 const showSuccessMessage = () => {
+  closeFormModal();
   body.append(successMessage);
   successMessage.addEventListener('click', (evt) => {
     if (!isClickOnMessage(evt) || isClickOnButton(evt)) {
       successMessage.remove();
-      closeFormModal();
     }
   });
-  document.addEventListener('keydown', (evt) => {
+  body.addEventListener('keydown', (evt) => {
     onEscKeydown(evt, successMessage);
   });
 };
@@ -37,8 +37,12 @@ const showErrorMessage = () => {
       errorMessage.remove();
     }
   });
-  document.addEventListener('keydown', (evt) => {
-    onEscKeydown(evt, errorMessage);
+  body.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      setTimeout(() => errorMessage.remove(), 0);
+    }
   });
 };
 
